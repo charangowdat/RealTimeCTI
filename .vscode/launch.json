@@ -2,19 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "cds serve",
+      "name": "CAP: cds watch",
+      "type": "node-terminal",
       "request": "launch",
-      "type": "node",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "cds",
-      "args": [
-        "serve",
-        "--with-mocks",
-        "--in-memory?"
-      ],
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

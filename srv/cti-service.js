@@ -1,30 +1,20 @@
 import cds from '@sap/cds'
-import { INSERT } from '@sap/cds/lib/ql/cds-ql'
+const { INSERT } = cds.ql
 
-export default class CTIService extends cds.ApplicationService{
-
+export default class CTIService extends cds.ApplicationService {
     async init() {
-        const {CallEvents} = this.entities
+        const { CallEvents } = this.entities
 
         this.on('notifyEvent', async req => {
-            const {
-                callId,
-                caller,
-                callee,
-                direction,
-                event
-            } = req.data
+            const { callId, caller, callee, direction, event } = req.data
 
-            //Basic Validations
-            if (!callId){
+            if (!callId) {
                 return req.reject(400, 'callId is required')
             }
 
-            if (!event){
+            if (!event) {
                 return req.reject(400, 'event is required')
             }
-
-            // Store the CTI event
 
             await INSERT.into(CallEvents).entries({
                 callId,
@@ -35,9 +25,9 @@ export default class CTIService extends cds.ApplicationService{
                 timestamp: new Date()
             })
 
-            return Ok
+            return 'Event received'
         })
-        
-        return super.unit()
+
+        return super.init()
     }
 }
