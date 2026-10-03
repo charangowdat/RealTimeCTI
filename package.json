@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
+    "@cap-js-community/websocket": "^1.11.2",
     "@sap/cds": "^10"
   },
   "devDependencies": {
