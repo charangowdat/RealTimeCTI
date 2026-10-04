@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Real-Time CTI Widget</title>
+
+    <script
+        id="sap-ui-bootstrap"
+        src="https://ui5.sap.com/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-libs="sap.m"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-onInit="module:sap/ui/core/ComponentSupport"
+        data-sap-ui-resourceroots='{
+            "cti.widget": "./"
+        }'>
+    </script>
+</head>
+
+<body class="sapUiBody sapUiSizeCompact">
+    <div
+        data-sap-ui-component
+        data-name="cti.widget"
+        data-id="container"
+        data-settings='{"id" : "cti-widget"}'>
+    </div>
+</body>
+</html>

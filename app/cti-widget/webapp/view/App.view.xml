@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="cti.widget.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <App>
+
+        <Page title="Real-Time CTI">
+
+            <content>
+
+                <VBox
+                    class="sapUiMediumMargin"
+                    alignItems="Center">
+
+                    <Title
+                        text="📞 CTI Widget"
+                        level="H2"/>
+
+                    <ObjectStatus
+                        text="{= ${/connected} ? 'WebSocket Connected' : 'WebSocket Disconnected' }"
+                        state="{= ${/connected} ? 'Success' : 'Error' }"
+                        class="sapUiSmallMarginTop"/>
+
+                    <Panel
+                        headerText="Call Information"
+                        visible="{/hasCall}"
+                        width="400px"
+                        class="sapUiMediumMarginTop">
+
+                        <VBox
+                            class="sapUiMediumMargin">
+
+                            <ObjectStatus
+                                title="Status"
+                                text="{/event}"
+                                state="Information"/>
+
+                            <ObjectAttribute
+                                title="Call ID"
+                                text="{/callId}"/>
+
+                            <ObjectAttribute
+                                title="Caller"
+                                text="{/caller}"/>
+
+                            <ObjectAttribute
+                                title="Callee"
+                                text="{/callee}"/>
+
+                            <ObjectAttribute
+                                title="Direction"
+                                text="{/direction}"/>
+
+                        </VBox>
+
+                    </Panel>
+
+                    <Text
+                        text="Waiting for call events..."
+                        visible="{= !${/hasCall} }"
+                        class="sapUiMediumMarginTop"/>
+
+                </VBox>
+
+            </content>
+
+        </Page>
+
+    </App>
+
+</mvc:View>
