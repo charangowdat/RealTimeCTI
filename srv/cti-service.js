@@ -48,6 +48,57 @@ export default class CTIService extends cds.ApplicationService {
             return 'Event received'
         })
 
+        // send Command (reverse)
+            this.on('sendCommand', async req => {
+                const { callId, command } = req.data
+
+            if (!callId) {
+                return req.reject(400, 'callId is required')
+            }
+
+            if (!command) {
+                return req.reject(400, 'command is required')
+            }
+
+            console.log('📞 CTI command received:', {
+                callId,
+                command
+            })
+
+            try {
+                const response = await fetch('http://localhost:5000/command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        callId,
+                        command
+                    })
+                })
+
+                const result = await response.json()
+
+                if (!response.ok) {
+                    return req.reject(
+                        response.status,
+                        result.message || 'Phone simulator rejected command'
+                    )
+                }
+
+                console.log('📱 Phone simulator response:', result)
+
+                return 'Command sent to phone simulator'
+            } catch (error) {
+                console.error('❌ Failed to contact phone simulator:', error)
+
+                return req.reject(
+                    500,
+                    'Phone simulator is unavailable'
+                )
+            }
+        })
+
         return super.init()
     }
 }

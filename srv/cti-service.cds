@@ -13,6 +13,11 @@ service CTIService {
         event     : String(30)
     ) returns String;
 
+    action sendCommand (
+        callId  :   String(100),
+        command  : String(30)
+    ) returns String
+        
 }
 
 @protocol: 'websocket'

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Sales Cloud V2 Simulator · Real-Time CTI</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="Sales Cloud simulator home">
+            <span class="brand-mark" aria-hidden="true">SC</span>
+            <span><strong>Sales Cloud V2</strong><small>CTI integration simulator</small></span>
+        </a>
+        <div class="topbar-right">
+            <span class="environment"><span class="environment-dot"></span> LOCAL DEMO</span>
+            <span class="version">Integration preview</span>
+        </div>
+    </header>
+    <main class="page-shell">
+        <section class="intro">
+            <div>
+                <p class="eyebrow">CTI HOST ENVIRONMENT</p>
+                <h1>Sales Cloud Simulator</h1>
+                <p class="intro-copy">A local stand-in for the Sales Cloud page that will host the CTI widget.</p>
+            </div>
+            <button id="simulateIncoming" class="primary-button" type="button"><span aria-hidden="true">＋</span> Simulate incoming call</button>
+        </section>
+        <div id="triggerStatus" class="trigger-status" role="status" aria-live="polite"></div>
+        <section class="workspace" aria-label="CTI simulator workspace">
+            <article class="card widget-card">
+                <div class="card-heading">
+                    <div><p class="eyebrow">EMBEDDED APPLICATION</p><h2>CTI Widget</h2></div>
+                    <span id="widgetStatus" class="status-pill waiting"><span class="status-dot"></span> Loading widget</span>
+                </div>
+                <div class="iframe-shell">
+                    <iframe id="ctiWidget" title="Real-Time CTI Widget" src="../../cti-widget/webapp/index.html"></iframe>
+                </div>
+                <p class="card-footnote">The widget runs as a separate page inside this iframe and sends CTI notifications to its parent.</p>
+            </article>
+            <aside class="card payload-card" aria-labelledby="payloadHeading">
+                <div class="card-heading">
+                    <div><p class="eyebrow">WINDOW MESSAGE</p><h2 id="payloadHeading">Received CTI payload</h2></div>
+                    <span id="messageCount" class="count-badge">0 messages</span>
+                </div>
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon" aria-hidden="true">↙</div>
+                    <strong>Waiting for a call notification</strong>
+                    <p>Simulate a call or use Answer and End in the widget. Messages sent with window.parent.postMessage() will appear here.</p>
+                </div>
+                <div id="payloadContent" class="payload-content" hidden>
+                    <div class="field-grid">
+                        <div class="data-field"><span>Type</span><strong id="fieldType">—</strong></div>
+                        <div class="data-field"><span>Event type</span><strong id="fieldEventType">—</strong></div>
+                        <div class="data-field"><span>Action</span><strong id="fieldAction">—</strong></div>
+                        <div class="data-field"><span>ANI</span><strong id="fieldAni">—</strong></div>
+                        <div class="data-field field-wide"><span>External reference ID</span><strong id="fieldReference">—</strong></div>
+                    </div>
+                    <div class="raw-heading"><span>Raw XML</span><span id="receivedAt" class="received-at"></span></div>
+                    <pre id="rawPayload" class="raw-payload"></pre>
+                </div>
+            </aside>
+        </section>
+        <section class="card activity-card">
+            <div class="card-heading">
+                <div><p class="eyebrow">SESSION</p><h2>Recent notifications</h2></div>
+                <span class="count-badge">Newest first</span>
+            </div>
+            <ol id="eventLog" class="event-log"><li id="logPlaceholder" class="log-placeholder">No CTI notifications received yet.</li></ol>
+        </section>
+        <footer class="page-footer"><span>Local integration simulator</span><span>Parent page ⇄ CTI widget iframe</span></footer>
+    </main>
+    <script src="./simulator.js"></script>
+</body>
+</html>

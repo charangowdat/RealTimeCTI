@@ -63,6 +63,22 @@
 
                 </VBox>
 
+                <HBox
+                    justifyContent="Center"
+                    class="sapUiMediumMarginTop">
+
+                    <Button
+                        text="Answer"
+                        type="Accept"
+                        press=".onAnswer"/>
+
+                    <Button
+                        text="End"
+                        type="Reject"
+                        press=".onEnd"
+                        class="sapUiSmallMarginBegin"/>
+                </HBox>
+
             </content>
 
         </Page>
